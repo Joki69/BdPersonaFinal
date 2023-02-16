@@ -7,6 +7,11 @@ import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.util.Properties;
 
+/**
+ * Esta clase se encargara de establecer y gestionar una conexión con una basede datos PostgreSQL
+ *
+ *  @author Jonathan Carralero - Joki69 in GitHub
+ */
 public class ConnectionFactory {
 	// init database constants
 	private static final String DATABASE_DRIVER = "org.postgresql.Driver";
@@ -22,7 +27,7 @@ public class ConnectionFactory {
 	private String user;
 	private String password;
 	private String schema;
-	
+
 	// init connection object
 	private Connection connection;
 	// init properties object
@@ -33,18 +38,21 @@ public class ConnectionFactory {
 		init();
 	}
 
+	/**
+	 * Con este contructor podremos iniciar conexión
+	 * @return
+	 */
 	public static ConnectionFactory getInstance() {
 		if (instance == null) {
 			instance = new ConnectionFactory();
 		}
 		return instance;
 	}
-	
+
 	/**
-	 * Initializes the class loading the database properties file and assigns values
-	 * to the instance variables.
-	 * 
-	 * @throws RuntimeException Properties file could not be found.
+	 * Inicia la clase con el archivo de propiedades de la base de datos.
+	 *
+	 * @throws RuntimeException Saltara el error si no encuentra el archivo correcto
 	 */
 	public void init() {
 		Properties prop = new Properties();
@@ -65,7 +73,7 @@ public class ConnectionFactory {
 		}
 	}
 
-//	// create properties
+	//	// create properties
 	private Properties getProperties() {
 		if (properties == null) {
 			properties = new Properties();
@@ -84,7 +92,7 @@ public class ConnectionFactory {
 				String url = null;
 
 				Class.forName(DATABASE_DRIVER);
-				
+
 				// Preprara connexió a la base de dades
 				StringBuffer sbUrl = new StringBuffer();
 				sbUrl.append("jdbc:postgresql:");
@@ -96,10 +104,10 @@ public class ConnectionFactory {
 				}
 				sbUrl.append("/").append(dbname);
 				url = sbUrl.toString();
-				
+
 				System.out.println(url);
 				System.out.println(getProperties());
-						
+
 				connection = DriverManager.getConnection(url, getProperties());
 			} catch (Exception e) {
 				e.printStackTrace();
@@ -119,7 +127,7 @@ public class ConnectionFactory {
 			}
 		}
 	}
-	
+
 //	public void init() {
 //		Properties prop = new Properties();
 //		InputStream propStream = this.getClass().getClassLoader().getResourceAsStream("db.properties");
@@ -136,5 +144,6 @@ public class ConnectionFactory {
 //			throw new RuntimeException(message, e);
 //		}
 //	}
-	
+
 }
+

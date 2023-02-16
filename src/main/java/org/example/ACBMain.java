@@ -1,7 +1,13 @@
 package org.example;
 
 import java.sql.Connection;
-
+/**
+ * Clase Main donde iniciare las conexiones con la base de datos y mostrare un menu
+ * dentro de un bucle para poder acceder a todas las funciones, el usuario podrá hacer inserts
+ * deletes updates y selects
+ *
+ * @author Jonathan Carralero - Joki69 in GitHub
+ */
 public class ACBMain {
     public static void main(String[] args) {
         ACBMenu menu = new ACBMenu();
@@ -13,7 +19,7 @@ public class ACBMain {
         ArcanaController arcanaController = new ArcanaController(c);
 
         int option = menu.mainMenu();
-        while (option != 11) {
+        while (option != 14) {
             switch (option) {
                 case 1:
                     personaController.borrarTablaPersona();
@@ -34,7 +40,7 @@ public class ACBMain {
                     break;
 
                 case 4:
-                    personaController.insertNewPersona();
+                    personaController.insertNewPersona(menu);
                     break;
 
                 case 5:
@@ -50,7 +56,7 @@ public class ACBMain {
                     break;
 
                 case 8:
-                    personaController.mostrarPersonaArcanaNombre();
+                    personaController.mostrarPersonaArcanaNombre(menu.arcanaChek());
                     break;
 
                 case 9:
@@ -58,17 +64,18 @@ public class ACBMain {
                     break;
 
                 case 10:
-                    personaController.modificarNombrePersonaPorArcana();
+                    personaController.modificarNombrePersonaPorArcana(menu);
                     break;
 
                 case 11:
-                    arcanaController.borrarTablaArcanaNombre();
+                    arcanaController.borrarTablaArcanaNombre(menu.arcanaChek());
                     break;
 
                 case 12:
-                    personaController.borrarTablaPersonaPorArcana();
+                    personaController.borrarTablaPersonaPorArcana(menu.arcanaChek());
                     break;
                 case 13:
+                    menu.arcanaChek();
                     break;
             }
             option = menu.mainMenu();

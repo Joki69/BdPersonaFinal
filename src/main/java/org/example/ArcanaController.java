@@ -9,16 +9,29 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
+/**
+ * En la clase ArcanaController como su nombre indica contendrá los metodos necesarios para manipular o acceder a
+ * la información de la base de datos de la tabla "arcana".
+ *
+ *  @author Jonathan Carralero - Joki69 in GitHub
+ */
 public class ArcanaController {
     private Connection connection;
     private Scanner scanner;
 
+    /**
+     * Con este constructor será lo que nos permita conectar a la base de datos y usar sus metodos desde el main
+     *
+     * @param connection
+     */
     public ArcanaController(Connection connection) {
         this.connection = connection;
         this.scanner = new Scanner(System.in);
     }
 
-
+    /**
+     * Con este metodo podremos borrar la tabla de arcanas.
+     */
     public void borrarTablaArcana(){
         try{
             Statement st = connection.createStatement();
@@ -29,6 +42,9 @@ public class ArcanaController {
         }
     }
 
+    /**
+     * Aqui podremos crear la tabla arcanas vacías
+     */
     public void crearTablaArcana(){
         try{
             Statement st = connection.createStatement();
@@ -45,6 +61,9 @@ public class ArcanaController {
         }
     }
 
+    /**
+     * Con este metodo podremos poblar la tabla de arcana con el csv que le corresponde
+     */
     public void poblarArcana(){
         List<String[]> csvData = new ArrayList<>();
         try{
@@ -78,6 +97,9 @@ public class ArcanaController {
         }
     }
 
+    /**
+     * Con este metodo podremos mostrar toda la información que contiene la tabla de arcanas por la terminal
+     */
     public void mostrarArcana(){
         System.out.println("\nARCANAS");
         ResultSet rs = null;
@@ -102,32 +124,11 @@ public class ArcanaController {
         }
     }
 
-    public void borrarTablaArcanaNombre(){
+    /**
+     * Con este metodo podremos seleccionar uno de los nombres de nuestra tabla para eliminarlo
+     */
+    public void borrarTablaArcanaNombre(String entidad){
         ResultSet rs = null;
-        System.out.println("Elige uno de estos arcana:");
-        System.out.println("Fool \n" +
-                "Magician\n" +
-                "Priestess\n" +
-                "Empress\n" +
-                "Emperor\n" +
-                "Hierophant\n" +
-                "Lovers\n" +
-                "Chariot\n" +
-                "Justice\n" +
-                "Hermit\n" +
-                "Fortune\n" +
-                "Strength\n" +
-                "Hanged Man\n" +
-                "Death\n" +
-                "Temperance\n" +
-                "Devil\n" +
-                "Tower\n" +
-                "Star\n" +
-                "Moon\n" +
-                "Sun\n" +
-                "Judgement");
-        String entidad = scanner.nextLine();
-
         try{
             Statement st = connection.createStatement();
             st.executeUpdate("DELETE FROM arcana WHERE nombre = '" + entidad + "'");

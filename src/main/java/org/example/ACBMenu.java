@@ -3,10 +3,19 @@ package org.example;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.util.Locale;
+import java.util.Scanner;
 
+/**
+ *Desde esta clase relacionado con el menu que controla en el main aqui mostraremos las opciones posibles para que el
+ * usuario decida que quiere hacer, tendrá efecto en la base de datos.
+ *
+ *  @author Jonathan Carralero - Joki69 in GitHub
+ */
 public class ACBMenu {
 	private int option;
 
+	private Scanner scanner = new Scanner(System.in);
 	public ACBMenu() {
 		super();
 	}
@@ -17,6 +26,7 @@ public class ACBMenu {
 		do {
 
 			System.out.println(" \nMENU PRINCIPAL \n");
+			System.out.println("Escoge una opcion: ");
 
 			System.out.println("1. Borrar tablas");
 			System.out.println("2. Crear tablas");
@@ -30,8 +40,8 @@ public class ACBMenu {
 			System.out.println("10. Modificar un conjunto de persona de arcana");
 			System.out.println("11. Eliminar un registro concreto de la tabla arcana");
 			System.out.println("12. Eliminar un conjunto de personas de un mismo arcana");
-			System.out.println("13. Salir del programa");
-			System.out.println("Escoge una opcion: ");
+			System.out.println("0. Salir del programa");
+
 			try {
 				option = Integer.parseInt(br.readLine());
 			} catch (NumberFormatException | IOException e) {
@@ -60,6 +70,52 @@ public class ACBMenu {
 		Identity identity = new Identity(user, password);
 		return identity;
 
+	}
+
+	/**
+	 * Es esta parte del codigo podremos asegurar que el usuario elige uno de los arcana correctos y ademas evitaremos
+	 * tener codigo repetido dentro del resto de clases.
+	 *
+	 * @return
+	 */
+	public String arcanaChek() {
+		while (true) {
+			System.out.println("Elige uno de estos arcana:");
+			System.out.println("Fool \n" +
+					"Magician\n" +
+					"Priestess\n" +
+					"Empress\n" +
+					"Emperor\n" +
+					"Hierophant\n" +
+					"Lovers\n" +
+					"Chariot\n" +
+					"Justice\n" +
+					"Hermit\n" +
+					"Fortune\n" +
+					"Strength\n" +
+					"Hanged Man\n" +
+					"Death\n" +
+					"Temperance\n" +
+					"Devil\n" +
+					"Tower\n" +
+					"Star\n" +
+					"Moon\n" +
+					"Sun\n" +
+					"Judgement");
+			String entidad= scanner.nextLine();
+			String comprobar = entidad.toLowerCase(Locale.ROOT);
+			if (comprobar.equals("fool") || comprobar.equals("magician") || comprobar.equals("priestess") || comprobar.equals("empress")
+					|| comprobar.equals("emperor") || comprobar.equals("hierophant") || comprobar.equals("lovers") || comprobar.equals("chariot")
+					|| comprobar.equals("justice") || comprobar.equals("hermit") || comprobar.equals("fortune") || comprobar.equals("strength")
+					|| comprobar.equals("hanged man") || comprobar.equals("death") || comprobar.equals("temperance") || comprobar.equals("devil")
+					|| comprobar.equals("tower") || comprobar.equals("star") || comprobar.equals("moon") || comprobar.equals("sun") || comprobar.equals("judgement")) {
+				return entidad;
+			}
+			else {
+				System.out.println("No has seleccionado ninguna de las posibles opciones prueba otra vez\n");
+			}
+
+		}
 	}
 
 }
